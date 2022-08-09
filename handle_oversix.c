@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_oversix.c                                   :+:      :+:    :+:   */
+/*   handle_oversix3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:45:27 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/08 21:45:47 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:00:54 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,80 @@
 
 void	pa_half(int min, int max, t_stack *stack_a, t_stack *stack_b);
 
-void	pb_two_half(int min, int max, t_stack *stack_a, t_stack *stack_b)
+void	pb_all(int min, int max, t_stack *stack_a, t_stack *stack_b)
 {
-	int	mid;
-	int	i;
+	int	count;
 
-	mid = (min + max) / 2;
 	if (max - min <= 2)
 	{
-		handle_two(stack_a, stack_b);
+		if (max - min == 1)
+			do_operation(stack_a, stack_b, RA);
+		if (max - min == 2)
+		{
+			handle_two(stack_a, stack_b);
+			do_operation(stack_a, stack_b, RA);
+			do_operation(stack_a, stack_b, RA);
+		}
 		return ;
 	}
-	i = 0;
-	while (i < mid - min)
+	count = 0;
+	while (1)
 	{
-		do_operation(stack_a, stack_b, RRA);
-		i++;
+		if (count == max - min)
+			break ;
+		if (stack_a->array[0] == min)
+		{
+			do_operation(stack_a, stack_b, RA);
+			min++;
+		}
+		else
+		{
+			do_operation(stack_a, stack_b, PB);
+			count++;
+		}
 	}
-	i = 0;
-	while (i < max - min)
-	{
-		do_operation(stack_a, stack_b, PB);
-		i++;
-	}
-	pa_half(mid, max, stack_a, stack_b);
-	pa_half(min, mid, stack_a, stack_b);
+	pa_half(min, max, stack_a, stack_b);
 }
 
 void	pa_half(int min, int max, t_stack *stack_a, t_stack *stack_b)
 {
 	int	count;
 	int	mid;
-	int	flag;
 
 	mid = (min + max) / 2;
 	count = 0;
-	flag = 1;
-	if (max - min <= 2)
-		flag = 0;
+	if (max - min < 1)
+		return ;
 	while (1)
 	{
-		if (min <= stack_b->array[0] && stack_b->array[0] < max)
+		if (count == max - mid)
+			break ;
+		if (mid <= stack_b->array[0] && stack_b->array[0] < max)
 		{
 			do_operation(stack_a, stack_b, PA);
-			if (min <= stack_a->array[0] && stack_a->array[0] < mid && flag == 1)
-				do_operation(stack_a, stack_b, RA);
 			count++;
 		}
 		else
 			do_operation(stack_a, stack_b, RB);
+	}
+	while (1)
+	{
 		if (count == max - min)
 			break ;
+		if (stack_b->array[0] == min)
+		{
+			do_operation(stack_a, stack_b, PA);
+			do_operation(stack_a, stack_b, RA);
+			min++;
+		}
+		else
+		{
+			do_operation(stack_a, stack_b, PA);
+			count++;
+		}
 	}
-	pb_two_half(min, max, stack_a, stack_b);
+	pb_all(min, mid, stack_a, stack_b);
+	pb_all(mid, max, stack_a, stack_b);
 }
 
 void	pb_half(int min, int max, t_stack *stack_a, t_stack *stack_b)
@@ -81,9 +102,10 @@ void	pb_half(int min, int max, t_stack *stack_a, t_stack *stack_b)
 		handle_two(stack_a, stack_b);
 		return ;
 	}
-	printf("min:%d, max:%d, mid:%d\n", min, max, mid);
 	while (1)
 	{
+		if (count == mid - min)
+			break ;
 		if (min <= stack_a->array[0] && stack_a->array[0] < mid)
 		{
 			do_operation(stack_a, stack_b, PB);
@@ -91,21 +113,7 @@ void	pb_half(int min, int max, t_stack *stack_a, t_stack *stack_b)
 		}
 		else
 			do_operation(stack_a, stack_b, RA);
-		if (count == mid - min)
-			break ;
 	}
-	pb_half(mid, max, stack_a, stack_b);
 	pa_half(min, mid, stack_a, stack_b);
+	pb_all(mid, max, stack_a, stack_b);
 }
-
-// min <= x < max
-
-//void	main(void)
-//{
-//	int	size;
-
-//	size = 100;
-//	recursion(0, size / 3)
-//	recursion(size / 3, size / 3 * 2)
-//	recursion(size / 3 * 2, size)
-//}

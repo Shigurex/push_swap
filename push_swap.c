@@ -6,19 +6,13 @@
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:53:52 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/08 22:00:03 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:04:55 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"push_swap.h"
 
-void	exit_safe(int *base_array)
-{
-	free(base_array);
-	exit(1);
-}
-
-int	atoi_within_int(const char *str, int *base_array)
+int	atoi_within_int(const char *str)
 {
 	size_t	i;
 	int		sign;
@@ -38,11 +32,11 @@ int	atoi_within_int(const char *str, int *base_array)
 			value = 10 * value + (str[i] - '0');
 			if ((sign == 1 && value > (long)INT_MAX)
 				|| (sign == -1 && value > -(long)INT_MIN))
-				exit_safe(base_array);
+				exit(1);
 			i++;
 		}
 		else
-			exit_safe(base_array);
+			exit(1);
 	}
 	return ((int)(sign * value));
 }
@@ -59,12 +53,12 @@ int	*input_data(int size, char **str)
 	i = 0;
 	while (i < size)
 	{
-		base_array[i] = atoi_within_int(str[i], base_array);
+		base_array[i] = atoi_within_int(str[i]);
 		j = 0;
 		while (j < i)
 		{
 			if (base_array[i] == base_array[j])
-				exit_safe(base_array);
+				exit(1);
 			j++;
 		}
 		i++;
@@ -82,7 +76,7 @@ int	*compression(int *base_array, int size)
 	i = 0;
 	compressed_array = malloc(sizeof(int) * size);
 	if (compressed_array == NULL)
-		exit_safe(base_array);
+		exit(1);
 	while (i < size)
 	{
 		j = 0;
@@ -131,6 +125,7 @@ int	main(int argc, char **argv)
 {
 	int		*base_array;
 	int		size;
+	//int		sorted;
 	t_stack	stack_a;
 	t_stack	stack_b;
 
@@ -140,8 +135,9 @@ int	main(int argc, char **argv)
 	base_array = input_data(size, &argv[1]);
 	stack_init(&stack_a, &stack_b, size, base_array);
 	free(base_array);
+	//sorted = 0
 	pb_half(0, size, &stack_a, &stack_b);
-	//print_stack(stack_a, stack_b);
 	do_operation(&stack_a, &stack_b, END);
-	return (0);
+	//print_stack(stack_a, stack_b);
+	exit (0);
 }
