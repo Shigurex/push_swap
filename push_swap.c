@@ -6,65 +6,11 @@
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:53:52 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/09 15:04:55 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/09 18:04:58 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"push_swap.h"
-
-int	atoi_within_int(const char *str)
-{
-	size_t	i;
-	int		sign;
-	long	value;
-
-	i = 0;
-	value = 0;
-	sign = 1;
-	if (str[i] == '-')
-		sign *= -1;
-	if (str[i] == '+' || str[i] == '-')
-		i++;
-	while (str[i])
-	{
-		if ('0' <= str[i] && str[i] <= '9')
-		{
-			value = 10 * value + (str[i] - '0');
-			if ((sign == 1 && value > (long)INT_MAX)
-				|| (sign == -1 && value > -(long)INT_MIN))
-				exit(1);
-			i++;
-		}
-		else
-			exit(1);
-	}
-	return ((int)(sign * value));
-}
-
-int	*input_data(int size, char **str)
-{
-	int	*base_array;
-	int	i;
-	int	j;
-
-	base_array = malloc(sizeof(int) * size);
-	if (base_array == NULL)
-		exit(1);
-	i = 0;
-	while (i < size)
-	{
-		base_array[i] = atoi_within_int(str[i]);
-		j = 0;
-		while (j < i)
-		{
-			if (base_array[i] == base_array[j])
-				exit(1);
-			j++;
-		}
-		i++;
-	}
-	return (base_array);
-}
 
 int	*compression(int *base_array, int size)
 {
@@ -93,9 +39,9 @@ int	*compression(int *base_array, int size)
 	return (compressed_array);
 }
 
-void	stack_init(t_stack *stack_a, t_stack *stack_b, int size, int *base_array)
+void	stack_init(t_stack *stack_a, t_stack *stack_b, int size, int *array)
 {
-	stack_a->array = compression(base_array, size);
+	stack_a->array = compression(array, size);
 	stack_a->size = size;
 	stack_b->array = malloc(sizeof(unsigned int) * size);
 	stack_b->size = 0;
@@ -125,19 +71,16 @@ int	main(int argc, char **argv)
 {
 	int		*base_array;
 	int		size;
-	//int		sorted;
 	t_stack	stack_a;
 	t_stack	stack_b;
 
-	size = argc - 1;
-	if (size == 0)
+	if (argc == 1)
 		return (1);
-	base_array = input_data(size, &argv[1]);
+	size = 0;
+	base_array = input_argument(argc, argv, &size);
 	stack_init(&stack_a, &stack_b, size, base_array);
 	free(base_array);
-	//sorted = 0
 	pb_half(0, size, &stack_a, &stack_b);
-	do_operation(&stack_a, &stack_b, END);
 	//print_stack(stack_a, stack_b);
 	exit (0);
 }

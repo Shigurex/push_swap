@@ -1,9 +1,11 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 MANDATORY_SRCS = push_swap.c \
-	operation.c \
+	do_operations.c \
+	four_operations.c \
 	handle_six.c \
-	handle_oversix3.c
+	handle_oversix.c \
+	get_argument.c
 MANDATORY_OBJS = ${MANDATORY_SRCS:.c=.o}
 NAME = push_swap
 
