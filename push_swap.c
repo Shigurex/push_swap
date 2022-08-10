@@ -6,7 +6,7 @@
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:53:52 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/09 18:04:58 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/10 18:41:49 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	main(int argc, char **argv)
 	stack_init(&stack_a, &stack_b, size, base_array);
 	free(base_array);
 	pb_half(0, size, &stack_a, &stack_b);
+	do_operation(&stack_a, &stack_b, END);
 	//print_stack(stack_a, stack_b);
 	exit (0);
 }

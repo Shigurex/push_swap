@@ -6,7 +6,7 @@
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:01:41 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/10 18:37:36 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/10 18:43:20 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,50 @@ static void	print_operation(int operation)
 		write(1, "rrr\n", 4);
 }
 
+void	output_operation(int *operations, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		print_operation(operations[i]);
+		i++;
+	}
+}
+
+int	*copy_operation(int size, int *keep, int new)
+{
+	int	i;
+	int	*tmp;
+
+	tmp = malloc(sizeof(int) * size);
+	i = 0;
+	while (i < size - 1)
+	{
+		tmp[i] = keep[i];
+		i++;
+	}
+	tmp[i] = new;
+	if (size > 1)
+		free(keep);
+	return (tmp);
+}
+
+void	stack_operation(int operation)
+{
+	static int	size;
+	static int	*keep;
+
+	if (operation == END)
+	{
+		output_operation(keep, size);
+		return ;
+	}
+	size++;
+	keep = copy_operation(size, keep, operation);
+}
+
 void	do_operation(t_stack *stack_a, t_stack *stack_b, int operation)
 {
 	if (operation == SA || operation == SS)
@@ -56,7 +100,7 @@ void	do_operation(t_stack *stack_a, t_stack *stack_b, int operation)
 		do_reverse_rotate(stack_a);
 	if (operation == RRB || operation == RRR)
 		do_reverse_rotate(stack_b);
-	print_operation(operation);
+	stack_operation(operation);
 	return ;
 }
 

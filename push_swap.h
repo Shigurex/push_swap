@@ -6,7 +6,7 @@
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 21:57:02 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/10 18:37:09 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/10 18:40:56 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define RRA 8
 # define RRB 9
 # define RRR 10
+# define END 11
 
 typedef struct s_stack {
 	int	*array;
