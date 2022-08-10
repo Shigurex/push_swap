@@ -6,7 +6,7 @@
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:01:41 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/09 18:28:17 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/10 18:37:36 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,23 @@ static void	print_operation(int operation)
 
 void	do_operation(t_stack *stack_a, t_stack *stack_b, int operation)
 {
-	int	flag;
-
-	flag = 0;
 	if (operation == SA || operation == SS)
-		do_swap(stack_a, &flag);
+		do_swap(stack_a);
 	if (operation == SB || operation == SS)
-		do_swap(stack_b, &flag);
+		do_swap(stack_b);
 	if (operation == PA)
-		do_push(stack_b, stack_a, &flag);
+		do_push(stack_b, stack_a);
 	if (operation == PB)
-		do_push(stack_a, stack_b, &flag);
+		do_push(stack_a, stack_b);
 	if (operation == RA || operation == RR)
-		do_reverse(stack_a, &flag);
+		do_reverse(stack_a);
 	if (operation == RB || operation == RR)
-		do_reverse(stack_b, &flag);
+		do_reverse(stack_b);
 	if (operation == RRA || operation == RRR)
-		do_reverse_rotate(stack_a, &flag);
+		do_reverse_rotate(stack_a);
 	if (operation == RRB || operation == RRR)
-		do_reverse_rotate(stack_b, &flag);
-	if (flag == 1)
-		print_operation(operation);
+		do_reverse_rotate(stack_b);
+	print_operation(operation);
 	return ;
 }
 
@@ -70,21 +66,21 @@ void	do_operation(t_stack *stack_a, t_stack *stack_b, int operation)
 
 //	flag = 0;
 //	if (operation == SA || operation == SS)
-//		do_swap(stack_a, &flag);
+//		do_swap(stack_a);
 //	if (operation == SB || operation == SS)
-//		do_swap(stack_b, &flag);
+//		do_swap(stack_b);
 //	if (operation == PA)
-//		do_push(stack_b, stack_a, &flag);
+//		do_push(stack_b, stack_a);
 //	if (operation == PB)
-//		do_push(stack_a, stack_b, &flag);
+//		do_push(stack_a, stack_b);
 //	if (operation == RA || operation == RR)
-//		do_reverse(stack_a, &flag);
+//		do_reverse(stack_a);
 //	if (operation == RB || operation == RR)
-//		do_reverse(stack_b, &flag);
+//		do_reverse(stack_b);
 //	if (operation == RRA || operation == RRR)
-//		do_reverse_rotate(stack_a, &flag);
+//		do_reverse_rotate(stack_a);
 //	if (operation == RRB || operation == RRR)
-//		do_reverse_rotate(stack_b, &flag);
+//		do_reverse_rotate(stack_b);
 //	if (flag == 1)
 //	{
 //		print_stack(*stack_a, *stack_b);

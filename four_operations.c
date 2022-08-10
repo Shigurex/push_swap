@@ -6,13 +6,13 @@
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 12:17:06 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/09 18:02:08 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/10 18:37:01 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"push_swap.h"
 
-void	do_swap(t_stack *stack, int *flag)
+void	do_swap(t_stack *stack)
 {
 	int	tmp;
 
@@ -21,10 +21,9 @@ void	do_swap(t_stack *stack, int *flag)
 	tmp = stack->array[0];
 	stack->array[0] = stack->array[1];
 	stack->array[1] = tmp;
-	*flag = 1;
 }
 
-void	do_push(t_stack *stack_from, t_stack *stack_to, int *flag)
+void	do_push(t_stack *stack_from, t_stack *stack_to)
 {
 	int	i;
 
@@ -45,10 +44,9 @@ void	do_push(t_stack *stack_from, t_stack *stack_to, int *flag)
 		i++;
 	}
 	stack_from->size--;
-	*flag = 1;
 }
 
-void	do_reverse(t_stack *stack, int *flag)
+void	do_reverse(t_stack *stack)
 {
 	int	tmp;
 	int	i;
@@ -63,10 +61,9 @@ void	do_reverse(t_stack *stack, int *flag)
 		i++;
 	}
 	stack->array[i] = tmp;
-	*flag = 1;
 }
 
-void	do_reverse_rotate(t_stack *stack, int *flag)
+void	do_reverse_rotate(t_stack *stack)
 {
 	int	tmp;
 	int	i;
@@ -81,5 +78,4 @@ void	do_reverse_rotate(t_stack *stack, int *flag)
 		i--;
 	}
 	stack->array[i] = tmp;
-	*flag = 1;
 }
