@@ -6,7 +6,7 @@
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 21:57:02 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/10 18:40:56 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/11 00:42:05 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,19 @@
 # include	"limits.h"
 # include	"libft/libft.h"
 
-# define SA 0
-# define SB 1
-# define SS 2
-# define PA 3
-# define PB 4
-# define RA 5
-# define RB 6
-# define RR 7
-# define RRA 8
-# define RRB 9
-# define RRR 10
-# define END 11
+# define NONE 0
+# define SA 1
+# define SB 2
+# define SS 3
+# define PA 4
+# define PB 5
+# define RA 6
+# define RB 7
+# define RR 8
+# define RRA 9
+# define RRB 10
+# define RRR 11
+# define END 12
 
 typedef struct s_stack {
 	int	*array;
@@ -44,6 +45,6 @@ void	do_reverse_rotate(t_stack *stack);
 void	do_operation(t_stack *stack_a, t_stack *stack_b, int operation);
 void	print_stack(t_stack stack_a, t_stack stack_b); //need deleted
 void	handle_two(t_stack *stack_a, t_stack *stack_b);
-void	pb_half(int min, int max, t_stack *stack_a, t_stack *stack_b);
+void	quicksort(int size, t_stack *stack_a, t_stack *stack_b);
 
 #endif

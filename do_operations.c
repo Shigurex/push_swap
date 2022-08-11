@@ -6,7 +6,7 @@
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:01:41 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/10 18:43:20 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/11 13:05:37 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,17 @@ static void	print_operation(int operation)
 		write(1, "rrr\n", 4);
 }
 
+//void	change_operation(int *operations)
+//{
+	
+//}
+
 void	output_operation(int *operations, int size)
 {
 	int	i;
 
 	i = 0;
+	//change_operation(operations);
 	while (i < size)
 	{
 		print_operation(operations[i]);
@@ -101,14 +107,10 @@ void	do_operation(t_stack *stack_a, t_stack *stack_b, int operation)
 	if (operation == RRB || operation == RRR)
 		do_reverse_rotate(stack_b);
 	stack_operation(operation);
-	return ;
 }
 
 //void	do_operation(t_stack *stack_a, t_stack *stack_b, int operation)
 //{
-//	int	flag;
-
-//	flag = 0;
 //	if (operation == SA || operation == SS)
 //		do_swap(stack_a);
 //	if (operation == SB || operation == SS)
@@ -125,11 +127,7 @@ void	do_operation(t_stack *stack_a, t_stack *stack_b, int operation)
 //		do_reverse_rotate(stack_a);
 //	if (operation == RRB || operation == RRR)
 //		do_reverse_rotate(stack_b);
-//	if (flag == 1)
-//	{
-//		print_stack(*stack_a, *stack_b);
-//		print_operation(operation);
-//		usleep(300000);
-//	}
-//	return ;
+//	print_stack(*stack_a, *stack_b);
+//	print_operation(operation);
+//	usleep(300000);
 //}
