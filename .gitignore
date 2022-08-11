@@ -1,3 +1,8 @@
 a.out
 .DS_Store
-checker_Mac
+*.o
+push_swap
+checker*
+push_swap_tester
+trial1
+PushSwapShowdown
