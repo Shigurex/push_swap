@@ -6,13 +6,13 @@
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:53:52 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/11 00:41:57 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/13 17:44:42 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"push_swap.h"
 
-int	*compression(int *base_array, int size)
+static int	*compression(int *base_array, int size)
 {
 	int	i;
 	int	j;
@@ -39,32 +39,12 @@ int	*compression(int *base_array, int size)
 	return (compressed_array);
 }
 
-void	stack_init(t_stack *stack_a, t_stack *stack_b, int size, int *array)
+static void	stack_init(t_stack *stack_a, t_stack *stack_b, int size, int *array)
 {
 	stack_a->array = compression(array, size);
 	stack_a->size = size;
 	stack_b->array = malloc(sizeof(unsigned int) * size);
 	stack_b->size = 0;
-}
-
-void	print_stack(t_stack stack_a, t_stack stack_b)
-{
-	int	i;
-
-	i = 0;
-	printf("--------------------stack_a--------------------\n");
-	while (i < stack_a.size)
-	{
-		printf("%d\n", stack_a.array[i]);
-		i++;
-	}
-	printf("--------------------stack_b--------------------\n");
-	i = 0;
-	while (i < stack_b.size)
-	{
-		printf("%d\n", stack_b.array[i]);
-		i++;
-	}
 }
 
 int	main(int argc, char **argv)
@@ -80,8 +60,10 @@ int	main(int argc, char **argv)
 	base_array = input_argument(argc, argv, &size);
 	stack_init(&stack_a, &stack_b, size, base_array);
 	free(base_array);
-	quicksort(size, &stack_a, &stack_b);
+	if (size <= 5)
+		handle_fiveunder(size, &stack_a, &stack_b);
+	else
+		handle_sixover(size, &stack_a, &stack_b);
 	do_operation(&stack_a, &stack_b, END);
-	//print_stack(stack_a, stack_b);
 	exit (0);
 }

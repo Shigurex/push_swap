@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_six.c                                       :+:      :+:    :+:   */
+/*   handle_fiveunder.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:39:37 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/10 18:45:19 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/13 17:55:31 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"push_swap.h"
 
-void	handle_two(t_stack *stack_a, t_stack *stack_b)
+static void	handle_two(t_stack *stack_a, t_stack *stack_b)
 {
 	int	top;
 	int	bottom;
@@ -62,4 +62,42 @@ void	handle_three(t_stack *stack_a, t_stack *stack_b)
 		do_operation(stack_a, stack_b, SA);
 		do_operation(stack_a, stack_b, RRA);
 	}
+}
+
+static void	handle_four_five(int size, t_stack *stack_a, t_stack *stack_b)
+{
+	int	count;
+
+	count = 0;
+	while (count < size - 3)
+	{
+		if (stack_a->array[0] < size - 3)
+		{
+			do_operation(stack_a, stack_b, PB);
+			count++;
+		}
+		else
+			do_operation(stack_a, stack_b, RA);
+	}
+	handle_three(stack_a, stack_b);
+	if (size == 4)
+		do_operation(stack_a, stack_b, PA);
+	if (size == 5)
+	{
+		if (stack_b->array[0] < stack_b->array[1])
+			do_operation(stack_a, stack_b, SB);
+		do_operation(stack_a, stack_b, PA);
+		do_operation(stack_a, stack_b, PA);
+	}
+	count = 0;
+}
+
+void	handle_fiveunder(int size, t_stack *stack_a, t_stack *stack_b)
+{
+	if (size == 2)
+		handle_two(stack_a, stack_b);
+	else if (size == 3)
+		handle_three(stack_a, stack_b);
+	else
+		handle_four_five(size, stack_a, stack_b);
 }

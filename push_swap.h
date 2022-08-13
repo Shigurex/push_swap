@@ -6,7 +6,7 @@
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 21:57:02 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/11 00:42:05 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/13 18:00:13 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include	"limits.h"
 # include	"libft/libft.h"
 
-# define NONE 0
 # define SA 1
 # define SB 2
 # define SS 3
@@ -43,8 +42,19 @@ void	do_push(t_stack *stack_from, t_stack *stack_to);
 void	do_reverse(t_stack *stack);
 void	do_reverse_rotate(t_stack *stack);
 void	do_operation(t_stack *stack_a, t_stack *stack_b, int operation);
-void	print_stack(t_stack stack_a, t_stack stack_b); //need deleted
-void	handle_two(t_stack *stack_a, t_stack *stack_b);
-void	quicksort(int size, t_stack *stack_a, t_stack *stack_b);
+void	handle_three(t_stack *stack_a, t_stack *stack_b);
+void	handle_fiveunder(int size, t_stack *stack_a, t_stack *stack_b);
+void	handle_sixover(int size, t_stack *stack_a, t_stack *stack_b);
+void	stack_operation(int operation);
+void	check_pa_pb(int *operations, int *size, int cur);
+void	check_ra_rb(int *operations, int *size, int cur);
+void	check_pb_ra_pa(int *operations, int *size, int cur);
+void	check_pa_rb_pb(int *operations, int *size, int cur);
+void	check_pb_rra_pa(int *operations, int *size, int cur);
+void	check_pa_rrb_pb(int *operations, int *size, int cur);
+void	check_sb_rb_pa(int *operations, int *size, int cur);
+void	check_sa_ra_pb(int *operations, int *size, int cur);
+void	check_sa_pb_ra(int *operations, int *size, int cur);
+void	check_sb_pa_rb(int *operations, int *size, int cur);
 
 #endif
