@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_argument.c                                     :+:      :+:    :+:   */
+/*   get_argument_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:40:45 by yahokari          #+#    #+#             */
-/*   Updated: 2022/08/14 16:14:54 by yahokari         ###   ########.fr       */
+/*   Updated: 2022/08/14 16:13:37 by yahokari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"push_swap.h"
+#include	"checker_bonus.h"
 
 static int	atoi_within_int(const char *str)
 {
@@ -32,11 +32,11 @@ static int	atoi_within_int(const char *str)
 			value = 10 * value + (str[i] - '0');
 			if ((sign == 1 && value > (long)INT_MAX)
 				|| (sign == -1 && value > -(long)INT_MIN))
-				exit(1);
+				exit_error(1);
 			i++;
 		}
 		else
-			exit(1);
+			exit_error(1);
 	}
 	return ((int)(sign * value));
 }
@@ -49,18 +49,18 @@ static int	*input_data(int size, char **str)
 
 	base_array = malloc(sizeof(int) * size);
 	if (base_array == NULL)
-		exit(1);
+		exit_error(1);
 	i = 0;
 	while (i < size)
 	{
 		if (ft_strlen(str[i]) == 0)
-			exit(1);
+			exit_error(1);
 		base_array[i] = atoi_within_int(str[i]);
 		j = 0;
 		while (j < i)
 		{
 			if (base_array[i] == base_array[j])
-				exit(1);
+				exit_error(1);
 			j++;
 		}
 		i++;
@@ -101,7 +101,7 @@ int	*input_argument(int argc, char **argv, int *size)
 		arg_data = ft_split(argv[1], ' ');
 		*size = count_arg(arg_data);
 		if (*size == 0)
-			exit(1);
+			exit_error(1);
 		base_array = input_data(*size, arg_data);
 		free_arg_data(arg_data);
 	}

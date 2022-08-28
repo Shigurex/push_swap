@@ -6,7 +6,7 @@
 #    By: yahokari <yahokari@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 23:46:47 by yahokari          #+#    #+#              #
-#    Updated: 2022/07/06 00:04:31 by yahokari         ###   ########.fr        #
+#    Updated: 2022/08/13 20:02:08 by yahokari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,9 @@ SRCS = ft_atoi.c \
 	ft_lstsize.c \
 	ft_lstiter.c \
 	ft_lstlast.c \
-	ft_lstmap.c
+	ft_lstmap.c \
+	get_next_line.c \
+	get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o)
 NAME = libft.a

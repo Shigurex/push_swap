@@ -2,7 +2,7 @@ a.out
 .DS_Store
 *.o
 push_swap
-checker*
+checker
 push_swap_tester
 trial1
 trial2
